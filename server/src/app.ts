@@ -1,20 +1,23 @@
 import Fastify, { type FastifyInstance } from "fastify";
 import cors from "@fastify/cors";
-// import { registerAuth } from "./plugins/auth.js";
-import { registerHealthRoutes } from "./routes/health";
-// import { registerFeedbackRoutes } from "./routes/feedback.js";
+import { registerHealthRoutes, registerFeedbackRoutes } from "./routes";
+import { auth } from "./hooks";
+import { dbPlugin } from "./plugins";
+
 
 export function buildApp(): FastifyInstance {
   const app = Fastify({ logger: true });
 
   app.register(cors, { origin: true });
 
-  // Auth hook (API key)
-  // app.register(registerAuth);
+  // Plugins
+  app.register(dbPlugin);
 
   // Routes
   app.register(registerHealthRoutes);
-  // app.register(registerFeedbackRoutes);
-
+  app.register( async (app) => {
+    app.addHook("preHandler", auth);
+    app.register(registerFeedbackRoutes);
+  });
   return app;
 }
