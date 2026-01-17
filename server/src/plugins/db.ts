@@ -13,7 +13,6 @@ declare module "fastify" {
 }
 
 const dbPlugin: FastifyPluginAsync = async (app) => {
-    
   await initSchema(db);
 
   app.decorate("db", db);
@@ -23,4 +22,4 @@ const dbPlugin: FastifyPluginAsync = async (app) => {
   });
 };
 
-export default fp(dbPlugin, { name: "db" });
+export const dbp = fp(dbPlugin, { name: "db" });
