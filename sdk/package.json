@@ -1,18 +1,17 @@
 {
-  "name": "sdk",
+  "name": "feedback-widget-sdk",
   "version": "1.0.0",
-  "description": "",
   "private": true,
   "type": "module",
-  "main": "./dist/feedback-widget.iife.js",
+  "description": "Embeddable feedback widget SDK",
   "module": "./dist/feedback-widget.es.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/feedback-widget.es.js",
-      "default": "./dist/feedback-widget.es.js"
-    }
+      "import": "./dist/feedback-widget.es.js"
+    },
+    "./iife": "./dist/feedback-widget.iife.js"
   },
   "files": [
     "dist"
@@ -23,14 +22,14 @@
     "build:iife": "vite build --config vite.config.iife.ts",
     "build": "pnpm build:es && pnpm build:iife",
     "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "lint": "eslint ."
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "packageManager": "pnpm@10.28.0",
   "devDependencies": {
+    "jsdom": "^25.0.1",
     "typescript": "^5.5.0",
-    "vite": "^5.4.0"
+    "vite": "^5.4.0",
+    "vitest": "^4.0.17"
   }
 }
