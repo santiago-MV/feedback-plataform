@@ -118,8 +118,15 @@ export function openModal(opts: {
       });
       doClose();
     } catch (err) {
-      showError(err instanceof Error ? err.message : "Failed to send feedback.");
-      setBusy(false);
+      console.error("[FeedbackWidget]", err);
+
+  showError(
+    err instanceof Error
+      ? err.message
+      : "Failed to send feedback. Please try again."
+  );
+
+  setBusy(false);
     }
   });
 

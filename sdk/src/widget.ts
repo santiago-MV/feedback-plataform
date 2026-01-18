@@ -42,4 +42,18 @@ export const FeedbackWidget = {
       },
     });
   },
+  submitFeedback: async (payload: { rating: number; comment?: string | null }) => {
+    if (!state) throw new Error("Widget not initialized. Call FeedbackWidget.init() first.");
+
+    // minimal validation (optional)
+    if (!Number.isInteger(payload.rating) || payload.rating < 1 || payload.rating > 5) {
+      throw new Error("rating must be an integer between 1 and 5");
+    }
+
+    return await sendFeedback(state, {
+      rating: payload.rating,
+      comment: payload.comment ?? null,
+      timestamp: new Date().toISOString(),
+    });
+  }
 };
