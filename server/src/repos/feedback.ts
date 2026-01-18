@@ -15,7 +15,7 @@ const createFeedback = async (db: Kysely<Database>, feedback: NewFeedback) => {
             user_id: feedback.userId,
             rating: feedback.rating,
             comment: feedback.comment,
-            created_at: feedback.createdAt,
+            created_at: feedback.timestamp,
             saved_at: new Date().toISOString(),
         })
         .executeTakeFirstOrThrow();

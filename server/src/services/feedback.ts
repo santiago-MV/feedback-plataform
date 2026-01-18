@@ -1,8 +1,8 @@
-import type { FeedbackDTO, NewFeedback, FeedbackRepo, SubmitResult } from "../types";
+import type { NewFeedback, FeedbackRepo, SubmitResult } from "../types";
 
 type Clock = { nowISO(): string };
 
-const submitFeedback = async (repo: FeedbackRepo, clock: Clock, dto: FeedbackDTO): Promise<SubmitResult> => {
+const submitFeedback = async (repo: FeedbackRepo, clock: Clock, dto: NewFeedback): Promise<SubmitResult> => {
   if (!dto?.projectId || !dto?.userId) {
       return { ok: false, code: "MISSING_FIELDS" };
     }
@@ -15,7 +15,7 @@ const submitFeedback = async (repo: FeedbackRepo, clock: Clock, dto: FeedbackDTO
       userId: dto.userId,
       rating: dto.rating,
       comment: dto.comment ?? null,
-      createdAt: clock.nowISO(),
+      timestamp: dto.timestamp ?? clock.nowISO(),
     };
 
     const id = await repo.create(newFeedback);
@@ -24,6 +24,6 @@ const submitFeedback = async (repo: FeedbackRepo, clock: Clock, dto: FeedbackDTO
 
 export const newFeedbackService = (repo: FeedbackRepo, clock: Clock) => {
   return {
-    submitFeedback: (dto: FeedbackDTO) => submitFeedback(repo, clock, dto),
+    submitFeedback: (dto: NewFeedback) => submitFeedback(repo, clock, dto),
   };
 };

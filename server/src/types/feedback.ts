@@ -4,7 +4,7 @@ export interface Feedback {
     userId: string
     rating: number
     comment: string | null
-    createdAt: string
+    timestamp: string
 }
 
 export interface FeedbackRepo {
@@ -19,4 +19,3 @@ export type RepoErrorCode = "DB_LOCKED"
   | "UNKNOWN_DB_ERROR";
 
 export type NewFeedback = Omit<Feedback, 'id'>;
-export type FeedbackDTO = Omit<Feedback, 'id' | 'createdAt'>;
