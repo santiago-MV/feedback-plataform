@@ -1,2 +1,2 @@
-export { newFeedbackRepo } from './feedback';
+export { newFeedbackRepo } from './feedback.repo';
 export { RepoError } from './errors';

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Feedback Widget Demo (Script Tag)</title>
+    <style>
+      body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial; padding: 24px; }
+      button { padding: 10px 14px; border-radius: 10px; border: 1px solid #ddd; cursor: pointer; }
+    </style>
+  </head>
+  <body>
+    <h1>Feedback Widget Demo (Script Tag)</h1>
+
+    <button id="open">Open widget</button>
+
+    <!-- Load the IIFE build -->
+    <script src="../dist/feedback-widget.iife.js"></script>
+    <script>
+    FeedbackWidget.init({
+        projectId: "125",
+        apiKey: "my-super-secret-api-key",
+        backendUrl: "http://172.30.6.21:3001"
+    });
+
+    document.getElementById("open").addEventListener("click", () => {
+        FeedbackWidget.open();
+    });
+    </script>
+  </body>
+</html>
