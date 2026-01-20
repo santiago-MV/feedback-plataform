@@ -7,8 +7,8 @@ export interface WidgetState {
 
 export interface FeedbackPayload {
   rating: number;
-  comment: string | null;
   timestamp: string;
+  comment?: string;
 }
 
 export type WidgetInitOptions = {

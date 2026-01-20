@@ -11,7 +11,7 @@ export async function buildTestApp(opts: TestAppOpts = {}) {
   const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "feedback-server-"));
   const dbPath = path.join(tmpDir, `test-${randomUUID()}.db`);
 
-  const prevDb = process.env.DB_PATH;
+  const prevDb = process.env.DB_FILE;
   const prevKey = process.env.API_KEY;
 
   // Set env BEFORE loading app/db modules

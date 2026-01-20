@@ -26,14 +26,14 @@ describe("FeedbackWidget", () => {
   it("submitFeedback rejects invalid rating", async () => {
     FeedbackWidget.init({ projectId: "p1", apiKey: "k1" });
 
-    await expect(FeedbackWidget.submitFeedback({ rating: 0 })).rejects.toThrow(
+    await expect(FeedbackWidget.submit({ rating: 0 })).rejects.toThrow(
       /rating/,
     );
-    await expect(FeedbackWidget.submitFeedback({ rating: 6 })).rejects.toThrow(
+    await expect(FeedbackWidget.submit({ rating: 6 })).rejects.toThrow(
       /rating/,
     );
     await expect(
-      FeedbackWidget.submitFeedback({ rating: 2.5 }),
+      FeedbackWidget.submit({ rating: 2.5 }),
     ).rejects.toThrow(/integer/);
   });
 });

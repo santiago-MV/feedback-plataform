@@ -41,15 +41,15 @@ export const FeedbackWidget = {
 
         await sendFeedback(state!, {
           rating,
-          comment: comment ?? null,
+          comment,
           timestamp: new Date().toISOString(),
         });
       },
     });
   },
-  submitFeedback: async (payload: {
+  submit: async (payload: {
     rating: number;
-    comment?: string | null;
+    comment?: string;
   }) => {
     if (!state)
       throw new Error(
@@ -67,7 +67,7 @@ export const FeedbackWidget = {
 
     return await sendFeedback(state, {
       rating: payload.rating,
-      comment: payload.comment ?? null,
+      comment: payload.comment,
       timestamp: new Date().toISOString(),
     });
   },

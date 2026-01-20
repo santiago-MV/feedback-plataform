@@ -1,6 +1,6 @@
 import { injectStyles } from "./styles";
 
-type ModalSubmitInput = { rating: number; comment?: string | null };
+type ModalSubmitInput = { rating: number; comment?: string};
 
 export function openModal(opts: {
   onSubmit: (data: ModalSubmitInput) => void | Promise<void>;
@@ -114,7 +114,7 @@ export function openModal(opts: {
     try {
       await opts.onSubmit({
         rating,
-        comment: comment.value.trim() ? comment.value.trim() : null,
+        comment: comment?.value.trim() || undefined,
       });
       doClose();
     } catch (err) {

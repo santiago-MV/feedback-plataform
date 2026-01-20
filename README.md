@@ -51,7 +51,7 @@ Backend
 From the project root run:
 
 ```bash
-pnpm install & pnpm dev
+pnpm install && pnpm dev
 ```
 
 This will:
