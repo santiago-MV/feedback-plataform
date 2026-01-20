@@ -1,4 +1,4 @@
-import { Database } from "./types";
+import type { Database } from "./types";
 import SQLite from "better-sqlite3";
 import { Kysely, SqliteDialect } from "kysely";
 import path from "node:path";

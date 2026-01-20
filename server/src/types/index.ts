@@ -1,1 +1,1 @@
-export type * from './feedback';
+export type * from "./feedback";

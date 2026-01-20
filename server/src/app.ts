@@ -4,7 +4,6 @@ import { registerHealthRoutes, registerFeedbackRoutes } from "./routes";
 import { auth } from "./hooks";
 import { dbp } from "./plugins";
 
-
 export function buildApp(): FastifyInstance {
   const app = Fastify({ logger: true });
 
@@ -15,7 +14,7 @@ export function buildApp(): FastifyInstance {
 
   // Routes
   app.register(registerHealthRoutes);
-  app.register( async (app) => {
+  app.register(async (app) => {
     app.addHook("preHandler", auth);
     app.register(registerFeedbackRoutes);
   });

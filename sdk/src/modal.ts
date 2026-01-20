@@ -101,7 +101,7 @@ export function openModal(opts: {
 
   cancelBtn.addEventListener("click", doClose);
 
-  submitBtn.addEventListener("click", async () => {
+  const handleSubmit = async () => {
     clearError();
 
     const rating = Number(ratingSelect.value);
@@ -120,14 +120,18 @@ export function openModal(opts: {
     } catch (err) {
       console.error("[FeedbackWidget]", err);
 
-  showError(
-    err instanceof Error
-      ? err.message
-      : "Failed to send feedback. Please try again."
-  );
+      showError(
+        err instanceof Error
+          ? err.message
+          : "Failed to send feedback. Please try again.",
+      );
 
-  setBusy(false);
+      setBusy(false);
     }
+  };
+
+  submitBtn.addEventListener("click", () => {
+    void handleSubmit();
   });
 
   actions.appendChild(cancelBtn);

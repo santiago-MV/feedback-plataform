@@ -32,7 +32,11 @@ export async function buildTestApp(opts: TestAppOpts = {}) {
       await app.close();
       process.env.DB_PATH = prevDb;
       process.env.API_KEY = prevKey;
-      try { fs.rmSync(tmpDir, { recursive: true, force: true }); } catch {}
+      try {
+        fs.rmSync(tmpDir, { recursive: true, force: true });
+      } catch (e) {
+        console.error(e);
+      }
     },
   };
 }

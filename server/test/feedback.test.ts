@@ -1,6 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import { buildTestApp } from "./helpers/buildTestApp";
-import Database from "better-sqlite3";
 
 describe("POST /feedback", () => {
   let t: Awaited<ReturnType<typeof buildTestApp>>;

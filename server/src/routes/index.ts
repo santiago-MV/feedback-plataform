@@ -1,2 +1,2 @@
-export {registerHealthRoutes} from './health';
-export {registerFeedbackRoutes} from './feedback.route';
+export { registerHealthRoutes } from "./health";
+export { registerFeedbackRoutes } from "./feedback.route";

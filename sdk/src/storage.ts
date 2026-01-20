@@ -19,7 +19,7 @@ export function getOrCreateUserId(): string {
 }
 
 function safeUuid(): string {
-  const c = crypto as any;
+  const c = crypto as Crypto | undefined;
   if (c?.randomUUID) return c.randomUUID();
 
   return `${Date.now()}-${Math.random().toString(16).slice(2)}`;

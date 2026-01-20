@@ -1,10 +1,10 @@
-import { RepoErrorCode } from "../types";
+import type { RepoErrorCode } from "../types";
 
 export class RepoError extends Error {
   constructor(
     public readonly code: RepoErrorCode,
     message: string,
-    public readonly cause?: unknown
+    public readonly cause?: unknown,
   ) {
     super(message);
     this.name = "RepoError";
@@ -14,8 +14,15 @@ export class RepoError extends Error {
 export const mapDbError = (err: unknown): RepoError => {
   const msg = err instanceof Error ? err.message : String(err);
 
-  if (msg.includes("SQLITE_BUSY") || msg.toLowerCase().includes("database is locked")) {
-    return new RepoError("DB_LOCKED", "Database is temporarily unavailable", err);
+  if (
+    msg.includes("SQLITE_BUSY") ||
+    msg.toLowerCase().includes("database is locked")
+  ) {
+    return new RepoError(
+      "DB_LOCKED",
+      "Database is temporarily unavailable",
+      err,
+    );
   }
 
   if (msg.includes("SQLITE_CONSTRAINT")) {

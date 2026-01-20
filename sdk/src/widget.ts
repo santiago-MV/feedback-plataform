@@ -1,4 +1,4 @@
-import { WidgetState, WidgetInitOptions } from "./types";
+import type { WidgetState, WidgetInitOptions } from "./types";
 import { openModal } from "./modal";
 import { sendFeedback } from "./api";
 import { getOrCreateUserId } from "./storage";
@@ -12,7 +12,9 @@ export const FeedbackWidget = {
     if (!options.projectId?.trim()) throw new Error("projectId is required");
     if (!options.apiKey?.trim()) throw new Error("apiKey is required");
 
-    const backendUrl = (options.backendUrl?.trim() || DEFAULT_BACKEND_URL).replace(/\/+$/, "");
+    const backendUrl = (
+      options.backendUrl?.trim() || DEFAULT_BACKEND_URL
+    ).replace(/\/+$/, "");
 
     state = {
       userId: getOrCreateUserId(),
@@ -25,7 +27,10 @@ export const FeedbackWidget = {
   },
 
   open() {
-    if (!state) throw new Error("Widget not initialized. Call FeedbackWidget.init() first.");
+    if (!state)
+      throw new Error(
+        "Widget not initialized. Call FeedbackWidget.init() first.",
+      );
 
     openModal({
       onSubmit: async ({ rating, comment }) => {
@@ -42,11 +47,21 @@ export const FeedbackWidget = {
       },
     });
   },
-  submitFeedback: async (payload: { rating: number; comment?: string | null }) => {
-    if (!state) throw new Error("Widget not initialized. Call FeedbackWidget.init() first.");
+  submitFeedback: async (payload: {
+    rating: number;
+    comment?: string | null;
+  }) => {
+    if (!state)
+      throw new Error(
+        "Widget not initialized. Call FeedbackWidget.init() first.",
+      );
 
     // minimal validation (optional)
-    if (!Number.isInteger(payload.rating) || payload.rating < 1 || payload.rating > 5) {
+    if (
+      !Number.isInteger(payload.rating) ||
+      payload.rating < 1 ||
+      payload.rating > 5
+    ) {
       throw new Error("rating must be an integer between 1 and 5");
     }
 
@@ -55,5 +70,5 @@ export const FeedbackWidget = {
       comment: payload.comment ?? null,
       timestamp: new Date().toISOString(),
     });
-  }
+  },
 };

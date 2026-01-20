@@ -1,10 +1,10 @@
-import fp from 'fastify-plugin'
-import type { FastifyPluginAsync } from 'fastify'
-import type { Kysely } from 'kysely'
+import fp from "fastify-plugin";
+import type { FastifyPluginAsync } from "fastify";
+import type { Kysely } from "kysely";
 
-import { initSchema } from '../db/init'
-import { createDb } from '../db/index'
-import type { Database } from '../db/types'
+import { initSchema } from "../db/init";
+import { createDb } from "../db/index";
+import type { Database } from "../db/types";
 
 declare module "fastify" {
   interface FastifyInstance {

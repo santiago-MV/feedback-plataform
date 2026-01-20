@@ -1,1 +1,1 @@
-export {newFeedbackService} from './feedback.service';
+export { newFeedbackService } from "./feedback.service";

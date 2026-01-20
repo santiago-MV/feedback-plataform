@@ -15,7 +15,7 @@ export default defineConfig({
         lines: 85,
       },
       exclude: [
-        "**/index.ts",          // barrel exports
+        "**/index.ts", // barrel exports
         "test/**",
         "**/*.d.ts",
       ],

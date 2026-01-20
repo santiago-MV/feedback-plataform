@@ -18,9 +18,11 @@ describe("storage.getOrCreateUserId", () => {
   });
 
   it("falls back if localStorage throws (should be stable per session)", () => {
-    const getSpy = vi.spyOn(Storage.prototype, "getItem").mockImplementation(() => {
-      throw new Error("blocked");
-    });
+    const getSpy = vi
+      .spyOn(Storage.prototype, "getItem")
+      .mockImplementation(() => {
+        throw new Error("blocked");
+      });
 
     const id1 = getOrCreateUserId();
     const id2 = getOrCreateUserId();
