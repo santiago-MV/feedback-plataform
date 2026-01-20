@@ -1,1 +1,1 @@
-export type { Feedback, NewFeedback } from './feedback';
+export type * from "./feedback";

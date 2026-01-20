@@ -1,0 +1,1 @@
+export { newFeedbackService } from "./feedback.service";

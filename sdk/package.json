@@ -1,26 +1,38 @@
 {
-  "name": "sdk",
+  "name": "feedback-widget-sdk",
   "version": "1.0.0",
-  "description": "",
   "private": true,
-  "main": "./dist/feedback-widget.es.js",
+  "type": "module",
+  "description": "Embeddable feedback widget SDK",
   "module": "./dist/feedback-widget.es.js",
-  "files": ["dist"],
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/feedback-widget.es.js"
+    },
+    "./iife": "./dist/feedback-widget.iife.js"
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "dev": "vite build --watch",
-    "build": "vite build",
-    "test": "vitest run"
+    "dev": "concurrently -k -n site,es,iife \"pnpm dev:site\" \"pnpm dev:es\" \"pnpm dev:iife\"",
+    "dev:site": "vite --host 0.0.0.0 --port 5174 --strictPort",
+    "dev:es": "vite build --watch --config vite.config.es.ts",
+    "dev:iife": "vite build --watch --config vite.config.iife.ts",
+    "build:es": "vite build --config vite.config.es.ts",
+    "build:iife": "vite build --config vite.config.iife.ts",
+    "build": "pnpm build:es && pnpm build:iife",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint ."
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "packageManager": "pnpm@10.28.0",
   "devDependencies": {
-    "typescript": "^5.9.3",
-    "vite": "^7.3.1",
+    "jsdom": "^25.0.1",
+    "typescript": "^5.5.0",
+    "vite": "^5.4.0",
     "vitest": "^4.0.17"
-  },
-  "dependencies": {
-    "uuid": "^13.0.0"
   }
 }
