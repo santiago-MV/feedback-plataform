@@ -17,10 +17,15 @@
     "dist"
   ],
   "scripts": {
-    "dev": "vite",
+    "dev": "concurrently -k -n site,es,iife \"pnpm dev:site\" \"pnpm dev:es\" \"pnpm dev:iife\"",
+    "dev:site": "vite --host 0.0.0.0 --port 5174 --strictPort",
+    "dev:es": "vite build --watch --config vite.config.es.ts",
+    "dev:iife": "vite build --watch --config vite.config.iife.ts",
+
     "build:es": "vite build --config vite.config.es.ts",
     "build:iife": "vite build --config vite.config.iife.ts",
     "build": "pnpm build:es && pnpm build:iife",
+
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
