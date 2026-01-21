@@ -7,5 +7,5 @@ beforeEach(() => {
 
 afterEach(() => {
   delete process.env.API_KEY;
-  delete process.env.DB_PATH;
+  delete process.env.DB_FILE;
 });

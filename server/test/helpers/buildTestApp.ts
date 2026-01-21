@@ -15,11 +15,11 @@ export async function buildTestApp(opts: TestAppOpts = {}) {
   const prevKey = process.env.API_KEY;
 
   // Set env BEFORE loading app/db modules
-  process.env.DB_PATH = dbPath;
+  process.env.DB_FILE = dbPath;
   process.env.API_KEY = opts.apiKey ?? "test-api-key";
 
   // IMPORTANT: clear Node module cache for ESM imports between tests
-  // so db/index.ts re-reads process.env.DB_PATH.
+  // so db/index.ts re-reads process.env.DB_FILE.
   const { buildApp } = await import("../../src/app");
 
   const app = await buildApp();
@@ -30,7 +30,7 @@ export async function buildTestApp(opts: TestAppOpts = {}) {
     dbPath,
     async close() {
       await app.close();
-      process.env.DB_PATH = prevDb;
+      process.env.DB_FILE = prevDb;
       process.env.API_KEY = prevKey;
       try {
         fs.rmSync(tmpDir, { recursive: true, force: true });
